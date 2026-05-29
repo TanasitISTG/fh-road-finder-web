@@ -1,5 +1,7 @@
 # FH6 Screenshot Road Finder
 
+**[Try it live](https://thisisskay.github.io/fh-road-finder-web/)**
+
 A free, browser-based tool that helps you find the last few undiscovered roads in Forza Horizon 6.
 
 Drop in a map screenshot and the tool instantly highlights any pixels matching the undiscovered-road grey. Zoom in, pan around, change colours, and adjust tolerance — all live, no page reload needed.
