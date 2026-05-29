@@ -1,4 +1,4 @@
-/* FH Road Finder - Live browser-based pixel scanner */
+/* FH6 Road Finder - Live browser-based pixel scanner */
 (function(){
 "use strict";
 
