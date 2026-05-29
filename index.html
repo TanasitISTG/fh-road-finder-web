@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FH Road Finder</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>FH Road Finder</h1>
+    <p class="subtitle">Detect possible undiscovered roads in Forza Horizon map screenshots</p>
+    <p class="privacy-note">Images are processed locally in your browser and are not uploaded.</p>
+  </header>
+  <main>
+    <section class="panel" id="upload-section">
+      <h2>Upload Screenshot</h2>
+      <div id="drop-zone" class="drop-zone">
+        <p class="drop-text">Drag &amp; drop a map screenshot here</p>
+        <p class="drop-or">or</p>
+        <label class="file-label"><input type="file" id="file-input" accept="image/png,image/jpeg,image/bmp,image/tiff,image/webp">Choose file</label>
+        <p class="drop-formats">PNG (best), JPEG, BMP, TIFF, WebP</p>
+      </div>
+      <div id="image-info" class="image-info hidden"></div>
+    </section>
+    <div class="viewer-layout hidden" id="viewer-layout">
+      <section class="panel viewer-panel">
+        <div class="viewer-header">
+          <div class="zoom-controls">
+            <button id="zoom-in-btn" class="btn btn-small" title="Zoom in">+</button>
+            <button id="zoom-out-btn" class="btn btn-small" title="Zoom out">&minus;</button>
+            <button id="zoom-fit-btn" class="btn btn-small" title="Fit to view">Fit</button>
+            <button id="zoom-100-btn" class="btn btn-small" title="Actual pixels">1:1</button>
+            <span id="zoom-level" class="zoom-level">100%</span>
+          </div>
+          <div id="results-stats" class="results-stats"></div>
+        </div>
+        <div id="viewer-container" class="viewer-container">
+          <canvas id="output-canvas" class="output-canvas"></canvas>
+        </div>
+        <p class="viewer-hint">Scroll to zoom &middot; Drag to pan</p>
+        <div class="button-row">
+          <button id="download-btn" class="btn btn-primary" disabled>Download PNG</button>
+          <select id="download-mode" class="download-mode-select">
+            <option value="current">Current view</option>
+            <option value="overlay">Overlay</option>
+            <option value="black">Black highlight</option>
+            <option value="transparent">Transparent mask</option>
+            <option value="all">All three</option>
+          </select>
+          <button id="reset-btn" class="btn btn-secondary">New image</button>
+        </div>
+      </section>
+      <aside class="panel controls-panel">
+        <h2>Settings</h2>
+        <div class="ctrl">
+          <label>Tolerance: <span id="tolerance-value" class="val">5 (Loose)</span></label>
+          <input type="range" id="tolerance-slider" min="0" max="15" value="5" step="1" class="slider">
+          <div class="slider-labels"><span>0 Strict</span><span>5 Loose</span><span>15</span></div>
+        </div>
+        <div class="ctrl">
+          <label>Line thickness: <span id="thickness-value" class="val">1 px (off)</span></label>
+          <input type="range" id="thickness-slider" min="1" max="15" value="1" step="1" class="slider">
+          <div class="slider-labels"><span>1 Original</span><span>5</span><span>15 Thick</span></div>
+          <span class="hint">Makes small detections easier to see</span>
+        </div>
+        <div class="ctrl">
+          <label>Highlight colour</label>
+          <div class="colour-swatches" id="highlight-swatches">
+            <button class="swatch active" data-rgb="255,0,0" style="background:#ff0000" title="Red"></button>
+            <button class="swatch" data-rgb="0,255,0" style="background:#00ff00" title="Green"></button>
+            <button class="swatch" data-rgb="255,255,0" style="background:#ffff00" title="Yellow"></button>
+            <button class="swatch" data-rgb="0,255,255" style="background:#00ffff" title="Cyan"></button>
+            <button class="swatch" data-rgb="255,0,255" style="background:#ff00ff" title="Magenta"></button>
+            <button class="swatch" data-rgb="255,165,0" style="background:#ffa500" title="Orange"></button>
+            <button class="swatch" data-rgb="255,255,255" style="background:#ffffff" title="White"></button>
+            <input type="color" id="highlight-picker" value="#ff0000" title="Custom colour">
+          </div>
+          <input type="hidden" id="highlight-rgb" value="255,0,0">
+        </div>
+        <div class="ctrl">
+          <label>Highlight strength: <span id="alpha-value" class="val">85%</span></label>
+          <input type="range" id="overlay-alpha" min="0" max="100" value="85" step="5" class="slider">
+        </div>
+        <div class="ctrl">
+          <label>Output</label>
+          <div class="mode-buttons" id="mode-buttons">
+            <button class="mode-btn active" data-mode="overlay">Overlay</button>
+            <button class="mode-btn" data-mode="black">Black</button>
+            <button class="mode-btn" data-mode="transparent">Transparent</button>
+          </div>
+        </div>
+        <div class="ctrl">
+          <label>Min cluster: <span id="cluster-value" class="val">1 px</span></label>
+          <input type="range" id="min-cluster" min="1" max="50" value="1" step="1" class="slider">
+          <span class="hint">Raise to hide noise dots</span>
+        </div>
+        <details class="advanced-toggle">
+          <summary>Advanced</summary>
+          <div class="ctrl">
+            <label>Target colour</label>
+            <div class="target-colour-row">
+              <input type="color" id="target-picker" value="#808080">
+              <span id="target-rgb-display" class="rgb-display">RGB(128, 128, 128)</span>
+            </div>
+            <input type="hidden" id="target-rgb" value="128,128,128">
+            <span class="hint">The grey of undiscovered roads. Change only if needed.</span>
+          </div>
+        </details>
+      </aside>
+    </div>
+    <section class="panel" id="help-section">
+      <h2>Tips</h2>
+      <details><summary>How to take a clean map screenshot</summary>
+        <ol><li>Open the Forza Horizon map screen.</li><li>Zoom out to see as much map as possible.</li><li>Use PNG format (Win+Shift+S, paste into Paint, save as PNG).</li><li>JPEG works but needs tolerance 5 or 8.</li><li>Avoid overlapping UI elements.</li></ol>
+      </details>
+      <details><summary>How to find small missing roads</summary>
+        <ol><li>Switch to <strong>Black</strong> output mode.</li><li>Increase <strong>Line thickness</strong> to make tiny dots visible.</li><li>Scroll to zoom in, drag to pan around.</li><li>Use 1:1 to see actual pixels.</li><li>Try different highlight colours for contrast.</li></ol>
+      </details>
+      <details><summary>Tolerance guide</summary>
+        <ul><li><strong>0</strong> &mdash; Exact match. Clean PNG only.</li><li><strong>1-2</strong> &mdash; Strict/Normal. Good for PNG.</li><li><strong>5</strong> &mdash; Loose. Start here for JPEG.</li><li><strong>8+</strong> &mdash; Very loose. More false positives.</li></ul>
+        <p>JPEG compression shifts pixel colours, so higher tolerance is needed.</p>
+      </details>
+    </section>
+  </main>
+  <footer><p>FH Road Finder &mdash; open source, fully client-side. No data leaves your browser.</p></footer>
+  <canvas id="source-canvas" style="display:none"></canvas>
+  <input type="hidden" id="output-mode" value="overlay">
+  <script src="app.js"></script>
+</body>
+</html>
