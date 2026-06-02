@@ -8,13 +8,11 @@ most users. This CLI is kept for anyone who prefers local batch processing.
 
 ```text
 legacy-windows-cli/
-|-- Run_FH6_Map_Stitcher.bat
 |-- Run_FH6_Road_Finder.bat
 |-- README.md
 |-- archive-notes/
-|   `-- Historical implementation notes
+|   `-- Historical road-finder review notes
 `-- tools/
-    |-- fh6_map_stitcher.py
     `-- fh6_road_finder.py
 ```
 
@@ -76,27 +74,10 @@ abs(B - target_B) <= tolerance
 The launcher uses a minimum cluster size of `8` pixels. The Python script also
 supports manual CLI options if you want to adjust advanced settings directly.
 
-## Optional Map Stitcher
-
-The archived CLI also includes `Run_FH6_Map_Stitcher.bat`. This optional helper
-combines overlapping map screenshots into `output\stitched_map.png` and creates
-`output\coverage_map.png` so gaps are easier to spot.
-
-To use it:
-
-1. Put overlapping screenshots taken at the same zoom level into `input`.
-2. Double-click `Run_FH6_Map_Stitcher.bat`.
-3. Choose whether to crop the in-game UI.
-4. Check `output\stitched_map.png`.
-5. Check `output\coverage_map.png` for orange checkerboard gaps.
-
-The stitcher reuses the same local `.venv` and dependency set as the detector.
-
 ## Historical Notes
 
-The `archive-notes` folder preserves the earlier consolidation notes and design
-handoffs. They are included for reference only and are not required to run the
-CLI.
+The `archive-notes` folder preserves the earlier road-finder review handoffs.
+They are included for reference only and are not required to run the CLI.
 
 ## Notes
 
