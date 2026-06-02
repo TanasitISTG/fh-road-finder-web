@@ -17,14 +17,13 @@ This example uses a PNG map screenshot with:
 - Tolerance: **1 (Strict)**
 - Line thickness: **2 px**
 - Min cluster: **4 px**
+- Cycle highlight colours: **On**
 
-| Before | After: red overlay |
-|--------|--------------------|
-| ![Original Forza Horizon map screenshot](assets/example-before.png) | ![FH Road Finder red overlay result](assets/example-after-overlay.png) |
+| Before | Animated black-background colour cycle |
+|--------|-----------------------------------------|
+| ![Original Forza Horizon map screenshot](assets/example-before.png) | ![FH Road Finder animated colour-cycle preview](assets/example-colour-cycle.gif) |
 
-For very small missing roads, the **Black** output mode can make tiny detections easier to spot:
-
-![FH Road Finder black highlight mask](assets/example-black-mask.png)
+The animated GIF shows the cycling highlight effect available in the tool's **Black** output mode. For very small missing roads, increase **Line thickness** to make detections easier to spot.
 
 ## How It Works
 
