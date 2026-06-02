@@ -26,6 +26,8 @@ var swatches=document.getElementById("highlight-swatches");
 var hlPicker=document.getElementById("highlight-picker");
 var hlRGB=document.getElementById("highlight-rgb");
 var cycleColours=document.getElementById("cycle-colours");
+var cycleSpeed=document.getElementById("cycle-speed");
+var cycleSpeedValue=document.getElementById("cycle-speed-value");
 var modeBtns=document.getElementById("mode-buttons");
 var outMode=document.getElementById("output-mode");
 var downloadBtn=document.getElementById("download-btn");
@@ -114,6 +116,10 @@ cycleColours.addEventListener("change",function(){
   else stopColourCycle();
   scheduleRender();
 });
+cycleSpeed.addEventListener("input",function(){
+  cycleSpeedValue.textContent=this.value+" / 10";
+  if(cycleColours.checked) startColourCycle();
+});
 modeBtns.addEventListener("click",function(e){
   var btn=e.target.closest(".mode-btn"); if(!btn) return;
   modeBtns.querySelectorAll(".mode-btn").forEach(function(b){b.classList.remove("active");});
@@ -182,7 +188,10 @@ function startColourCycle(){
     if(!rawMask||document.hidden) return;
     cycleFrame=(cycleFrame+1)%CYCLE_COLOURS.length;
     renderCycleFrame();
-  },450);
+  },getCycleDelay());
+}
+function getCycleDelay(){
+  return Math.max(100,950-(parseInt(cycleSpeed.value,10)*100));
 }
 function stopColourCycle(){
   if(cycleTimer!==null){clearInterval(cycleTimer);cycleTimer=null;}
@@ -379,7 +388,7 @@ function dlAs(mode){
 // === Reset ===
 resetBtn.addEventListener("click",function(){
   stopColourCycle();
-  cycleColours.checked=false;cycleFrame=0;
+  cycleColours.checked=false;cycleSpeed.value="7";cycleSpeedValue.textContent="7 / 10";cycleFrame=0;
   srcData=null;rawMask=null;dilatedMask=null;imgW=0;imgH=0;
   viewerLayout.classList.add("hidden");
   imageInfo.classList.add("hidden");imageInfo.innerHTML="";

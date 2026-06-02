@@ -42,7 +42,7 @@ For very small missing roads, the **Black** output mode can make tiny detections
 - **Zoom and pan** — scroll to zoom into any area, drag to pan. Use the 1:1 button to see actual pixels.
 - **Line thickness** — dilate detected pixels so even a single-pixel match becomes a visible dot.
 - **Multiple highlight colours** — red, green, yellow, cyan, magenta, orange, white, or pick any custom colour.
-- **Colour cycling** — optionally animate the highlight colour so tiny detected roads stand out while scanning the map.
+- **Colour cycling** — optionally animate the highlight colour and adjust its speed so tiny detected roads stand out while scanning the map.
 - **Three output modes** — Overlay (highlights on original image), Black (highlights on black background, easiest to scan), and Transparent (for layering).
 - **Works with JPEG and PNG** — JPEG compression shifts colours, so use tolerance 5 or higher. PNG gives the most accurate results.
 

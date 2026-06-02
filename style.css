@@ -58,6 +58,7 @@ main{max-width:2200px;margin:0 auto;padding:16px}
 .swatch.active{border-color:#fff;transform:scale(1.12)}
 .check-row{display:flex!important;align-items:center;gap:7px;margin-top:9px!important;font-weight:500!important;cursor:pointer}
 .check-row input{accent-color:var(--accent);cursor:pointer}
+.cycle-speed-label{margin-top:9px!important}
 input[type="color"]{width:26px;height:26px;border:2px solid var(--inp-b);border-radius:4px;padding:0;cursor:pointer;background:none}
 input[type="color"]::-webkit-color-swatch-wrapper{padding:1px}
 input[type="color"]::-webkit-color-swatch{border:none;border-radius:2px}
