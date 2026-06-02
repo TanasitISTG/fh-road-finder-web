@@ -25,6 +25,7 @@ var targetDisp=document.getElementById("target-rgb-display");
 var swatches=document.getElementById("highlight-swatches");
 var hlPicker=document.getElementById("highlight-picker");
 var hlRGB=document.getElementById("highlight-rgb");
+var cycleColours=document.getElementById("cycle-colours");
 var modeBtns=document.getElementById("mode-buttons");
 var outMode=document.getElementById("output-mode");
 var downloadBtn=document.getElementById("download-btn");
@@ -46,6 +47,8 @@ var imgW=0, imgH=0;
 var zoomScale=1, panX=0, panY=0;
 var isPanning=false, psx=0, psy=0, ppx=0, ppy=0;
 var scanTimer=null;
+var cycleTimer=null, cycleFrame=0;
+var CYCLE_COLOURS=[[255,0,0],[255,255,0],[0,255,255],[255,0,255],[0,255,0],[255,165,0]];
 
 function fmt(n){return n.toLocaleString();}
 function hex2rgb(h){return[parseInt(h.substr(1,2),16),parseInt(h.substr(3,2),16),parseInt(h.substr(5,2),16)];}
@@ -54,6 +57,7 @@ function rgb2hex(r,g,b){return"#"+[r,g,b].map(function(c){return c.toString(16).
 function getSettings(){
   var tp=targetRGB.value.split(",").map(Number);
   var hp=hlRGB.value.split(",").map(Number);
+  if(cycleColours.checked) hp=CYCLE_COLOURS[cycleFrame%CYCLE_COLOURS.length];
   return{
     tR:tp[0],tG:tp[1],tB:tp[2],
     tol:parseInt(tolSlider.value,10),
@@ -102,6 +106,12 @@ hlPicker.addEventListener("input",function(){
   var c=hex2rgb(this.value);
   hlRGB.value=c.join(",");
   swatches.querySelectorAll(".swatch").forEach(function(s){s.classList.remove("active");});
+  scheduleRender();
+});
+cycleColours.addEventListener("change",function(){
+  cycleFrame=0;
+  if(this.checked) startColourCycle();
+  else stopColourCycle();
   scheduleRender();
 });
 modeBtns.addEventListener("click",function(e){
@@ -166,6 +176,25 @@ function scheduleRender(){
   clearTimeout(scanTimer);
   scanTimer=setTimeout(function(){dilateAndRender();},30);
 }
+function startColourCycle(){
+  stopColourCycle();
+  cycleTimer=setInterval(function(){
+    if(!rawMask||document.hidden) return;
+    cycleFrame=(cycleFrame+1)%CYCLE_COLOURS.length;
+    renderCycleFrame();
+  },450);
+}
+function stopColourCycle(){
+  if(cycleTimer!==null){clearInterval(cycleTimer);cycleTimer=null;}
+}
+function renderCycleFrame(){
+  if(!dilatedMask) return;
+  renderOutput(dilatedMask,getSettings());
+  applyZoom();
+}
+document.addEventListener("visibilitychange",function(){
+  if(!document.hidden&&cycleColours.checked) renderCycleFrame();
+});
 
 // === Core scan ===
 function runScan(){
@@ -349,6 +378,8 @@ function dlAs(mode){
 
 // === Reset ===
 resetBtn.addEventListener("click",function(){
+  stopColourCycle();
+  cycleColours.checked=false;cycleFrame=0;
   srcData=null;rawMask=null;dilatedMask=null;imgW=0;imgH=0;
   viewerLayout.classList.add("hidden");
   imageInfo.classList.add("hidden");imageInfo.innerHTML="";
