@@ -80,6 +80,12 @@ This tool was built and tested for **Forza Horizon 6**. It may also work with ot
 - Optimised for screens from 1080p to 4K, including ultrawide displays up to 32:9.
 - Works locally by opening `index.html` directly, or hosted on any static web server including GitHub Pages.
 
+## Legacy Windows CLI
+
+The earlier BAT + Python workflow is preserved in
+[`legacy-windows-cli`](legacy-windows-cli). It supports local batch processing,
+multiple tolerance passes, generated PNG masks, and an HTML report.
+
 ## Credits
 
 Built for the Forza Horizon 6 community. Open source, no tracking, no ads.
