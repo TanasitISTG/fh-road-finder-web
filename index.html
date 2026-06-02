@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FH6 Road Finder</title>
-  <link rel="stylesheet" href="style.css?v=20260602-2">
+  <link rel="stylesheet" href="style.css?v=20260602-3">
 </head>
 <body>
   <header>
@@ -54,13 +54,13 @@
       <aside class="panel controls-panel">
         <h2>Settings</h2>
         <div class="ctrl">
-          <label>Tolerance: <span id="tolerance-value" class="val">5 (Loose)</span></label>
-          <input type="range" id="tolerance-slider" min="0" max="15" value="5" step="1" class="slider">
+          <label>Tolerance: <span id="tolerance-value" class="val">0 (Ultra strict)</span></label>
+          <input type="range" id="tolerance-slider" min="0" max="15" value="0" step="1" class="slider">
           <div class="slider-labels"><span>0 Strict</span><span>5 Loose</span><span>15</span></div>
         </div>
         <div class="ctrl">
-          <label>Line thickness: <span id="thickness-value" class="val">1 px (off)</span></label>
-          <input type="range" id="thickness-slider" min="1" max="15" value="1" step="1" class="slider">
+          <label>Line thickness: <span id="thickness-value" class="val">2 px</span></label>
+          <input type="range" id="thickness-slider" min="1" max="15" value="2" step="1" class="slider">
           <div class="slider-labels"><span>1 Original</span><span>5</span><span>15 Thick</span></div>
           <span class="hint">Makes small detections easier to see</span>
         </div>
@@ -78,17 +78,13 @@
           </div>
           <input type="hidden" id="highlight-rgb" value="255,0,0">
           <label class="check-row">
-            <input type="checkbox" id="cycle-colours">
+            <input type="checkbox" id="cycle-colours" checked>
             <span>Cycle highlight colours</span>
           </label>
           <span class="hint">Animates detected pixels to make tiny roads easier to notice</span>
           <label class="cycle-speed-label">Cycle speed: <span id="cycle-speed-value" class="val">7 / 10</span></label>
           <input type="range" id="cycle-speed" min="1" max="10" value="7" step="1" class="slider">
           <div class="slider-labels"><span>1 Slow</span><span>10 Fast</span></div>
-        </div>
-        <div class="ctrl">
-          <label>Highlight strength: <span id="alpha-value" class="val">85%</span></label>
-          <input type="range" id="overlay-alpha" min="0" max="100" value="85" step="5" class="slider">
         </div>
         <div class="ctrl">
           <label>Output</label>
@@ -99,8 +95,8 @@
           </div>
         </div>
         <div class="ctrl">
-          <label>Min cluster: <span id="cluster-value" class="val">1 px</span></label>
-          <input type="range" id="min-cluster" min="1" max="50" value="1" step="1" class="slider">
+          <label>Min cluster: <span id="cluster-value" class="val">3 px</span></label>
+          <input type="range" id="min-cluster" min="1" max="50" value="3" step="1" class="slider">
           <span class="hint">Raise to hide noise dots</span>
         </div>
         <details class="advanced-toggle">
@@ -134,6 +130,6 @@
   <footer><p>FH6 Road Finder &mdash; open source, fully client-side. No data leaves your browser.</p></footer>
   <canvas id="source-canvas" style="display:none"></canvas>
   <input type="hidden" id="output-mode" value="overlay">
-  <script src="app.js?v=20260602-2"></script>
+  <script src="app.js?v=20260602-3"></script>
 </body>
 </html>

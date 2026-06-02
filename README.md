@@ -16,7 +16,6 @@ This example uses a PNG map screenshot with:
 
 - Tolerance: **1 (Strict)**
 - Line thickness: **2 px**
-- Highlight strength: **100%**
 - Min cluster: **4 px**
 
 | Before | After: red overlay |
@@ -49,6 +48,15 @@ For very small missing roads, the **Black** output mode can make tiny detections
 ## Privacy
 
 All processing runs locally in the browser using JavaScript and the Canvas API. No images are uploaded, no data is sent anywhere, and the tool works fully offline after the page loads.
+
+## Default Settings
+
+The tool starts with exact grey matching and a small visibility boost:
+
+- Tolerance: **0 (Ultra strict)**
+- Line thickness: **2 px**
+- Cycle highlight colours: **On**
+- Min cluster: **3 px**
 
 ## Tolerance Guide
 
