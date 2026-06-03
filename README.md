@@ -10,6 +10,16 @@ Drop in a map screenshot and the tool instantly highlights any pixels matching t
 
 **No installation. No server. No sign-up. Your images never leave your browser.**
 
+## Why This Tool Matters
+
+When you are stuck at 99% roads discovered, the missing piece can be a tiny grey segment hiding under icons, trees, or map texture. FH Road Finder helps narrow the search by highlighting pixels close to the undiscovered-road colour, so you spend less time sweeping the whole map and more time checking likely spots.
+
+## Compatibility And Screenshot Disclaimer
+
+This tool was built for **Forza Horizon 6** map screenshots. It might not work on **Forza Horizon 1 to Forza Horizon 5** because older games can use different map colours, UI layouts, compression, and road rendering. If enough players ask for earlier-game support, I may add support later.
+
+Use direct in-game screenshots only. **Phone photos of a TV or monitor cannot be scanned by this tool** because camera processing, glare, angle, blur, screen pixels, and colour shifts break the exact grey-pixel detection. PNG screenshots are best. JPEG can work if it is a direct game screenshot, but it may need tolerance 5 or 8.
+
 ## Example Result
 
 This example uses a PNG map screenshot with:
@@ -42,7 +52,7 @@ The animated GIFs show the cycling highlight effect in the tool's **Overlay** an
 - **Multiple highlight colours** — red, green, yellow, cyan, magenta, orange, white, or pick any custom colour.
 - **Colour cycling** — optionally animate the highlight colour and adjust its speed so tiny detected roads stand out while scanning the map.
 - **Three output modes** — Overlay (highlights on original image), Black (highlights on black background, easiest to scan), and Transparent (for layering).
-- **Works with JPEG and PNG** — JPEG compression shifts colours, so use tolerance 5 or higher. PNG gives the most accurate results.
+- **Works with direct PNG and JPEG screenshots** - PNG gives the most accurate results. JPEG compression shifts colours, so use tolerance 5 or higher.
 
 ## Privacy
 
@@ -72,7 +82,7 @@ JPEG compression shifts pixel colours, so a pixel that was exactly (128, 128, 12
 
 ## Compatibility
 
-This tool was built and tested for **Forza Horizon 6**. It may also work with other Forza Horizon titles if the map uses a similar grey for undiscovered roads, but it has not been tested on Forza Horizon 5 or earlier games. The target colour can be changed under Advanced settings if needed.
+This tool was built and tested for **Forza Horizon 6**. Forza Horizon 1 to Forza Horizon 5 are not supported right now and may not scan correctly. The target colour can be changed under Advanced settings if needed, but earlier-game support would need real screenshots and player testing.
 
 ## Technical Notes
 

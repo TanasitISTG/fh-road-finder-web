@@ -124,9 +124,9 @@ modeBtns.addEventListener("click",function(e){
 
 // === Image loading ===
 function loadImageFile(file){
-  var ok=["image/png","image/jpeg","image/bmp","image/tiff","image/webp"];
-  if(ok.indexOf(file.type)===-1&&!file.name.match(/\.(png|jpe?g|bmp|tiff?|webp)$/i)){
-    showInfo("Unsupported file type: "+file.name,true); return;
+  var ok=["image/png","image/jpeg"];
+  if(ok.indexOf(file.type)===-1&&!file.name.match(/\.(png|jpe?g)$/i)){
+    showInfo("Unsupported file type: "+file.name+". Use a direct PNG or JPEG game screenshot.",true); return;
   }
   var reader=new FileReader();
   reader.onerror=function(){showInfo("Failed to read file.",true);};
