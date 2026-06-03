@@ -11,7 +11,7 @@ legacy-windows-cli/
 |-- Run_FH6_Road_Finder.bat
 |-- README.md
 |-- archive-notes/
-|   `-- Historical road-finder review notes
+|   `-- ROAD_FINDER_REVIEW_NOTES.txt
 `-- tools/
     `-- fh6_road_finder.py
 ```
